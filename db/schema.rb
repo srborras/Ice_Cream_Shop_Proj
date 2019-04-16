@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_205553) do
+ActiveRecord::Schema.define(version: 2019_04_16_212217) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer "store_id"
@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 2019_04_16_205553) do
     t.time "start_time"
     t.time "end_time"
     t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "storeflavors", force: :cascade do |t|
+    t.integer "store_id"
+    t.integer "flavor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

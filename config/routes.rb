@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :storeflavors
   resources :flavors
   resources :shifts
   # get 'home/home'
