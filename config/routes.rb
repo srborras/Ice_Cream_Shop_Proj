@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :shifts
   # get 'home/home'
   # get 'home/about'
   # get 'home/privacy'
