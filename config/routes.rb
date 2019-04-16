@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :flavors
   resources :shifts
   # get 'home/home'
   # get 'home/about'
