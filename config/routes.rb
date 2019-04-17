@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :shiftjobs
   resources :jobs
   resources :storeflavors
   resources :flavors
