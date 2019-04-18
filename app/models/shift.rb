@@ -1,6 +1,7 @@
 class Shift < ApplicationRecord
     
     # Callbacks
+    # Check conditional
     before_create :set_end, if: Assignment.find(self.assignment_id).end_date != nil
     
     # Relations
@@ -28,6 +29,8 @@ class Shift < ApplicationRecord
     scope :by_store, -> { joins(:assignment => :store ).order('name')}
     scope :by_employee, -> { joins(assignment: :employee ).order('last_name, first_name')}
     
+    
+    # Private methods for callbacks and validations
     private
     
     def set_end
@@ -35,10 +38,25 @@ class Shift < ApplicationRecord
         self.end_time = time
     end
     
+    # Check Syntax
     def completed?
-        all_shiftjobs = Shiftjob.all.map{|e|}
+        all_shiftjobs = Shiftjob.where("shift_id = ?", self.id)
+        for x in all_shiftjobs
+            if x.job_id == nil
+                return false
+            end
+        end
     end
     
+    def start_now
+        curr_time = Time.now.to_time
+        self.start_time = curr_time
+    end
+    
+    def end_now
+        curr_time = Time.now.to_time
+        self.start_time = curr_time
+    end
     
     
 end
