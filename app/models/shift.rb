@@ -2,7 +2,7 @@ class Shift < ApplicationRecord
     
     # Callbacks
     # Check conditional
-    before_create :set_end, if: Assignment.find(self.assignment_id).end_date != nil
+    before_save :set_end, if: Assignment.find(self.assignment_id).end_date != nil
     
     # Relations
     belongs_to :assignments

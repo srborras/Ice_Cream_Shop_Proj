@@ -1,25 +1,33 @@
 class Job < ApplicationRecord
     
-    #Callbacks
+    # Callbacks
     #before_destroy :make_inactive
     
-    #Relations
+    # Relations
     has_many :shift_jobs
     has_many :shifts, through: :shift_jobs
     
-    #Validations
+    # Validations
     validates_presence_of :name
     
-    #Scopes
+    # Scopes
     scope :active, -> { where(active: true) }
     scope :inactive, -> { where(active: false) }
     scope :alphabetical, -> { order('name') }
     
-    #Callback code
+    # Callback code
     private
     
-    def make_inactive
-        self.active = false
+    # Check syntax or logic
+    def inactive
+        all_shiftjobs = Shiftjob.where("job_id = ?", self.id)
+        for x in all_shiftjobs
+            if x.shift_id == nil
+                self.active == false
+            else
+                self.destroy
+            end
+        end
     end
     
     
