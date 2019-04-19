@@ -4,7 +4,9 @@ class Store < ApplicationRecord
   
   # Relationships
   has_many :assignments
-  has_many :employees, through: :assignments  
+  has_many :employees, through: :assignments
+  has_many :storeflavors
+  has_many :flavors, through: :storeflavors
   
   # Validations
   # make sure required fields are present
@@ -36,6 +38,10 @@ class Store < ApplicationRecord
     phone = self.phone.to_s  # change to string in case input as all numbers 
     phone.gsub!(/[^0-9]/,"") # strip all non-digits
     self.phone = phone       # reset self.phone to new string
+  end
+  
+  def make_inactive
+    self.active = false
   end
 
 end

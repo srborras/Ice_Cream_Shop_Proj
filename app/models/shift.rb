@@ -2,7 +2,7 @@ class Shift < ApplicationRecord
     
     # Callbacks
     # Check conditional
-    before_save :set_end, if: Assignment.find(self.assignment_id).end_date != nil
+    before_save :set_end #, if: Assignment.find(self.assignment_id).end_date != nil
     
     # Relations
     belongs_to :assignments
@@ -11,6 +11,8 @@ class Shift < ApplicationRecord
     
     # Validations
     validates_presence_of :date, :start_time, :assignment_id
+    validate :curr_assign, on: :create
+    validate :can_delete, on: :delete
     
     # Scopes
     scope :completed, -> { joins(:shift_job).where.not(job_id: nil) }
@@ -18,7 +20,7 @@ class Shift < ApplicationRecord
     
     #Check Join
     scope :for_store, -> (store_id) { joins(:assignment).where("store_id = ?". store_id) }
-    scope :for_employee, -> (employee_id) { joins(:employee).where("employee_id = ?". employee_id) }
+    scope :for_employee, -> (employee_id) { joins(:assignment).where("employee_id = ?". employee_id) }
     
     scope :past, -> { where("date < ?", Date.now.to_date) }
     scope :upcoming, -> { where("date >= ?", Date.now.to_date) }
@@ -36,6 +38,20 @@ class Shift < ApplicationRecord
     def set_end
         time = self.start_time.t_time + 3*60
         self.end_time = time
+    end
+    
+    def curr_assign
+        curr_assignment = Assignment.find(self.assignment_id).end_date
+        unless curr_assignment == nil #.nil?
+            errors.add(:assignment_id, "Is not a current assignment")
+        end
+    end
+    
+    def can_delete
+        curr_shift = self.date.to_date
+        unless curr_shift <= Data.now.to_date
+            errors.add(:date, "The date has passed")
+        end
     end
     
     # Check Syntax

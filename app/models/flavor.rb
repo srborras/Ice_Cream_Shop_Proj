@@ -1,21 +1,21 @@
 class Flavor < ApplicationRecord
     
-    #Callbacks
-    #before_destroy :make_inactive
+    # Callbacks
+    # before_destroy :make_inactive
     
-    #Relations
+    # Relations
     has_many :store_flavors
     has_many :stores, through: :store_flavors
     
-    #Validations
+    # Validations
     validates_presence_of :name
     
-    #Scopes
+    # Scopes
     scope :active, -> { where(active: true) }
     scope :inactive, -> { where(active: false) }
     scope :alphabetical, -> { order('name') }
     
-    #Callback code
+    # Callback code
     private
     
     def make_inactive
