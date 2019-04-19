@@ -54,29 +54,46 @@ class Employee < ApplicationRecord
   # Check syntax
   def inactive_or_delete
     
-    emp_assignments = Assignment.where("employee_id = ?", self.id)
+    emp_assignments = Assignment.where("employee_id = ? AND end_date = ?", self.id, nil)
     if emp_assignments.size != 0
       
       emp_assignment_stat = false
       for i in emp_assignments
-        emp_assignment_shifts = Shift.where("assignment_if = ?", i.id)
+        emp_assignment_shifts = Shift.where("assignment_id = ?", i.id)
         
         if emp_assignment_shifts != 0
           emp_assignment_stat = true
+          self.active = false
+          emp.assignments.end_date = Date.now.to_date
+          
+          for j in emp_assignment_shifts
+            Shift.delete(j.id)
+          end
+        
+        else
+          
+          self.delete
+          Assignment.delete(emp_assignments.id)
+        
         end
         
       end
+       
+=begin
+if emp_assignment_stat == true
+      self.active = false
       
-      if emp_assignment_stat == true
-        self.active = false
-      else
-        Assignment.destroy(self.id)
-        self.destroy
-      end
+    else
+      Assignment.destroy(self.id)
+      self.destroy
+      User.destroy(self.id)
+    end
+=end
+      
       
     else
       
-      self.destroy
+      self.delete
     end
     
   end

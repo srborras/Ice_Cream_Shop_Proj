@@ -36,6 +36,9 @@ class Assignment < ApplicationRecord
       return true 
     else
       current_assignment.update_attribute(:end_date, self.start_date.to_date)
+      #additional from me
+      #emp_shifts = Shift.all.where("assignment_id = ?", current_assignment.id)
+      Shift.destroy_all.where("assignment_id = ? AND date < ?", current_assignment.id, current_assignment.end_date)
     end
   end
   
@@ -53,6 +56,16 @@ class Assignment < ApplicationRecord
       errors.add(:store_id, "is not an active store at the creamery")
     end
   end
+  
+  def assign_delete
+    
+    assignment_shifts = Shift.all.where("assignment_id = ?", self.id)
+    if assignment_shifts == 0
+      self.destroy
+    end
+  
+  end
+  
 end
 
 
