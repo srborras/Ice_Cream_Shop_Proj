@@ -6,6 +6,7 @@ class Employee < ApplicationRecord
   # Relationships
   has_many :assignments
   has_many :stores, through: :assignments
+  has_many :users
   
   # Validations
   validates_presence_of :first_name, :last_name, :date_of_birth, :ssn, :role
@@ -48,6 +49,36 @@ class Employee < ApplicationRecord
   
   def age
     (Time.now.to_s(:number).to_i - date_of_birth.to_time.to_s(:number).to_i)/10e9.to_i
+  end
+  
+  # Check syntax
+  def inactive_or_delete
+    
+    emp_assignments = Assignment.where("employee_id = ?", self.id)
+    if emp_assignments.size != 0
+      
+      emp_assignment_stat = false
+      for i in emp_assignments
+        emp_assignment_shifts = Shift.where("assignment_if = ?", i.id)
+        
+        if emp_assignment_shifts != 0
+          emp_assignment_stat = true
+        end
+        
+      end
+      
+      if emp_assignment_stat == true
+        self.active = false
+      else
+        Assignment.destroy(self.id)
+        self.destroy
+      end
+      
+    else
+      
+      self.destroy
+    end
+    
   end
   
   # Misc Constants

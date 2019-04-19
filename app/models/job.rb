@@ -21,8 +21,8 @@ class Job < ApplicationRecord
     # Check syntax or logic
     def inactive
         all_shiftjobs = Shiftjob.where("job_id = ?", self.id)
-        for x in all_shiftjobs
-            if x.shift_id == nil
+        for i in all_shiftjobs
+            if i.shift_id == nil
                 self.active == false
             else
                 self.destroy
