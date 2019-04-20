@@ -29,6 +29,10 @@ class Store < ApplicationRecord
   # Misc Constants
   STATES_LIST = [['Ohio', 'OH'],['Pennsylvania', 'PA'],['West Virginia', 'WV']]
   
+  # Methods
+  def make_inactive
+    self.active = false
+  end
   
   # Callback code
   # -----------------------------
@@ -40,9 +44,6 @@ class Store < ApplicationRecord
     self.phone = phone       # reset self.phone to new string
   end
   
-  def make_inactive
-    self.active = false
-  end
 
 end
 
