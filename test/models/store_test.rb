@@ -87,7 +87,10 @@ class StoreTest < ActiveSupport::TestCase
     end
     
     should "shows that stores are only be made inactive" do
+      assert_equal true, @cmu.active
+      print @cmu.active
       assert_equal false, @cmu.make_inactive
+      print @cmu.active
     end
     
   end

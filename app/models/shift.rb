@@ -5,13 +5,13 @@ class Shift < ApplicationRecord
     before_save :set_end #, if: Assignment.find(self.assignment_id).end_date != nil
     
     # Relations
-    belongs_to :assignments
-    has_many :shift_jobs
-    has_many :jobs, through: :shift_job
+    belongs_to :assignment
+    has_many :shiftjobs
+    has_many :jobs, through: :shiftjobs
     
     # Validations
     validates_presence_of :date, :start_time, :assignment_id
-    validate :curr_assign, on: :create
+    validate :curr_assign?, on: :create
     validate :can_delete, on: :delete
     
     # Scopes
@@ -40,7 +40,7 @@ class Shift < ApplicationRecord
         self.end_time = time
     end
     
-    def curr_assign
+    def curr_assign?
         curr_assignment = Assignment.find(self.assignment_id).end_date
         unless curr_assignment == nil #.nil?
             errors.add(:assignment_id, "Is not a current assignment")
