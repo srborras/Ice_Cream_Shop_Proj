@@ -1,3 +1,7 @@
+<div class="grey lighten-4" id="form">
+
+<h2> <%= @store.name %> Store Information </h2>
+  
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -35,5 +39,8 @@
   <%= @store.active %>
 </p>
 
-<%= link_to 'Edit', edit_store_path(@store) %> |
-<%= link_to 'Back', stores_path %>
+<%= link_to 'Edit', edit_store_path(@store), :class=> "waves-effect waves-light btn light-blue" %>
+<%= link_to 'Delete', @store, method: :delete, :class=> "waves-effect waves-light btn red" %>
+<%= link_to 'Return', stores_path, :class=> "waves-effect waves-light btn green" %>
+
+</div>

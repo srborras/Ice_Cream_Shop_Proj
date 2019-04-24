@@ -1,6 +1,10 @@
-<h1>Editing Store</h1>
+<div class="grey lighten-4" id="form">
+    
+<h2> Edit <%= @store.name %> Store </h2>
 
 <%= render 'form', store: @store %>
 
-<%= link_to 'Show', @store %> |
-<%= link_to 'Back', stores_path %>
+<br />
+<%= link_to 'Show', @store, :class=> "waves-effect waves-light btn green" %>
+<%= link_to 'Back', stores_path, :class=> "waves-effect waves-light btn red" %>
+</div>

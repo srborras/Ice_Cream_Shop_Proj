@@ -11,42 +11,47 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
+  
+
+  <div class="input-field">
+    <%= form.label :name %><br />
     <%= form.text_field :name %>
   </div>
 
-  <div class="field">
-    <%= form.label :street %>
+  <div class="input-field">
+    <%= form.label :street %><br />
     <%= form.text_field :street %>
   </div>
 
-  <div class="field">
-    <%= form.label :city %>
+  <div class="input-field">
+    <%= form.label :city %><br />
     <%= form.text_field :city %>
   </div>
 
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state %>
+  <div class="input-field">
+    <%= form.label :state %><br />
+    <%= form.select :state, ([['PA', 'PA'], ['OH', 'OH'], ['WV', 'WV']]) %>
   </div>
 
-  <div class="field">
-    <%= form.label :zip %>
+  <div class="input-field">
+    <%= form.label :zip %><br />
     <%= form.text_field :zip %>
   </div>
 
-  <div class="field">
-    <%= form.label :phone %>
+  <div class="input-field">
+    <%= form.label :phone %><br />
     <%= form.text_field :phone %>
   </div>
 
-  <div class="field">
-    <%= form.label :active %>
-    <%= form.check_box :active %>
+  <div class="input-field">
+    <%= form.label :active %><br />
+    <%= form.select :active, ([['True', true], ['False', false]]) %>
   </div>
 
+  <br/>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :class=> "waves-effect waves-light btn light-blue" %>
   </div>
+    
 <% end %>
