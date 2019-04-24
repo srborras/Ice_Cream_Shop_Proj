@@ -3,6 +3,8 @@ class Employee < ApplicationRecord
   # Callbacks
   before_save :reformat_phone
   before_validation :reformat_ssn
+  before_delete :stop_destroy
+  after_rollback :make_inactive
   
   # Relationships
   has_many :assignments
@@ -31,6 +33,46 @@ class Employee < ApplicationRecord
   
   # Other methods
   
+  def stop_destroy
+  
+    if to_destroy?
+      
+    else
+      self.errors.add(:base, "Cannot delete a Store!")
+      throw(:abort)
+    end
+  end
+  
+  def to_destroy?
+    @to_destroy = self.shifts.past.empty?
+  end
+  
+  def delete_case
+    if @to_destroy
+    @future_shifts = self.shifts.upcoming
+    @future_shifts.each {|i| i.destroy} unless @future_shifts.empty?
+    self.curr_assignment.delete unless self.current_assignment.nil?
+    end
+    @to_destroy = nil
+  end
+  
+  def update_case
+    
+    if !@to_destroy.nil? && @to_destroy == false
+      @future_shifts = self.shifts.upcoming
+      @future_shifts.each {|i| i.destroy} unless @future_shifts.empty?
+      curr_assign = self.current_assignment
+      unless curr_assign.nil?
+        curr_assign.update_attribute(:end_date, Date.now.to_date)
+      end
+    end
+    @to_destroy = nil
+  end
+  
+  def make_inactive
+    self.update_attribute(:active, false)
+  end
+  
   def name
     "#{last_name}, #{first_name}"
   end
@@ -55,52 +97,50 @@ class Employee < ApplicationRecord
     (Time.now.to_s(:number).to_i - date_of_birth.to_time.to_s(:number).to_i)/10e9.to_i
   end
   
-  # Check syntax
-  def inactive_or_delete
+  # # Check syntax
+  # def inactive_or_delete
     
-    emp_assignments = Assignment.where("employee_id = ? AND end_date = ?", self.id, nil)
-    if emp_assignments.size != 0
+  #   emp_assignments = Assignment.where("employee_id = ? AND end_date = ?", self.id, nil)
+  #   if emp_assignments.size != 0
       
-      emp_assignment_stat = false
-      for i in emp_assignments
-        emp_assignment_shifts = Shift.where("assignment_id = ?", i.id)
+  #     emp_assignment_stat = false
+  #     for i in emp_assignments
+  #       emp_assignment_shifts = Shift.where("assignment_id = ?", i.id)
         
-        if emp_assignment_shifts != 0
-          emp_assignment_stat = true
-          self.active = false
-          emp.assignments.end_date = Date.now.to_date
+  #       if emp_assignment_shifts != 0
+  #         emp_assignment_stat = true
+  #         self.active = false
+  #         emp.assignments.end_date = Date.now.to_date
           
-          for j in emp_assignment_shifts
-            Shift.delete(j.id)
-          end
+  #         for j in emp_assignment_shifts
+  #           Shift.delete(j.id)
+  #         end
         
-        else
+  #       else
           
-          self.delete
-          Assignment.delete(emp_assignments.id)
+  #         self.delete
+  #         Assignment.delete(emp_assignments.id)
         
-        end
+  #       end
         
-      end
+  #     end
        
-=begin
-if emp_assignment_stat == true
-      self.active = false
+  #   # if emp_assignment_stat == true
+  #   #   self.active = false
       
-    else
-      Assignment.destroy(self.id)
-      self.destroy
-      User.destroy(self.id)
-    end
-=end
+  #   # else
+  #   #   Assignment.destroy(self.id)
+  #   #   self.destroy
+  #   #   User.destroy(self.id)
+  #   # end
       
       
-    else
+  #   else
       
-      self.delete
-    end
+  #     self.delete
+  #   end
     
-  end
+  # end
   
   # Misc Constants
   ROLES_LIST = [['Employee', 'employee'],['Manager', 'manager'],['Administrator', 'admin']]
