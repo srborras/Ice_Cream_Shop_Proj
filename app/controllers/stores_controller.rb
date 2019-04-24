@@ -56,9 +56,7 @@ class StoresController < ApplicationController
   # DELETE /stores/1
   # DELETE /stores/1.json
   def destroy
-    # @store.destroy
-    # Test if it works
-    @store.make_inactive
+    @store.destroy
     respond_to do |format|
       format.html { redirect_to stores_url, notice: 'Store was made inactive.' }
       format.json { head :no_content }
