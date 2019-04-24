@@ -2,6 +2,9 @@ class Store < ApplicationRecord
 # Callbacks
   before_save :reformat_phone
   
+  before_destroy :stop_destroy
+  after_rollback :make_inactive
+  
   # Relationships
   has_many :assignments
   has_many :employees, through: :assignments
@@ -30,8 +33,13 @@ class Store < ApplicationRecord
   STATES_LIST = [['Ohio', 'OH'],['Pennsylvania', 'PA'],['West Virginia', 'WV']]
   
   # Methods
+  def stop_destroy
+    self.errors.add(:base, "Cannot delete a Store!")
+    throw(:abort)
+  end
+  
   def make_inactive
-    self.active = false
+    self.update_attribute(:active, false)
   end
   
   # Callback code
