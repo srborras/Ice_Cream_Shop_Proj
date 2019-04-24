@@ -27,5 +27,14 @@ FactoryBot.define do
     end_date {1.month.ago.to_date}
     pay_level {1}
   end
+  
+  factory :shift do
+    association :assignment
+    # Check Date.now syntax
+    date {2.weeks.ago.to_date}
+    start_time {Time.now.to_time}
+    end_time {Time.now.to_time + 3*60}
+    notes {"None"}
+  end
 
 end
