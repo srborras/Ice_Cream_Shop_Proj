@@ -1,5 +1,7 @@
 class User < ApplicationRecord
     
+    has_secure_password
+    
     # Relations
     belongs_to :employee
     

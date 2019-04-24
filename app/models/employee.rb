@@ -1,5 +1,8 @@
 class Employee < ApplicationRecord
-# Callbacks
+  
+  accepts_nested_attributes_for :user
+  
+  # Callbacks
   before_save :reformat_phone
   before_validation :reformat_ssn
   

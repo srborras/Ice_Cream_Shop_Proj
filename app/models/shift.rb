@@ -42,7 +42,7 @@ class Shift < ApplicationRecord
     
     def curr_assign
         curr_assignment = Assignment.find(self.assignment_id).end_date
-        unless curr_assignment == nil #.nil?
+        unless curr_assignment.nil? #.nil?
             errors.add(:assignment_id, "Is not a current assignment")
         end
         
