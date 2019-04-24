@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class StoreflavorTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  
+  # Testing Relations
+  should belong_to(:flavor)
+  should belong_to(:store)
+  
 end

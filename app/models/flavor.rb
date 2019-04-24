@@ -1,11 +1,12 @@
 class Flavor < ApplicationRecord
     
     # Callbacks
-    # before_destroy :make_inactive
+    before_destroy :stop_destroy
+    after_rollback :make_inactive
     
     # Relations
-    has_many :store_flavors
-    has_many :stores, through: :store_flavors
+    has_many :storeflavors
+    has_many :stores, through: :storeflavors
     
     # Validations
     validates_presence_of :name
@@ -15,11 +16,14 @@ class Flavor < ApplicationRecord
     scope :inactive, -> { where(active: false) }
     scope :alphabetical, -> { order('name') }
     
-    # Callback code
-    private
+    # Methods
+    def stop_destroy
+        self.errors.add(:base, "Cannot delete a Flavor!")
+        throw(:abort)
+    end
     
     def make_inactive
-        self.active = false
+        self.update_attribute(:active, false)
     end
     
 end

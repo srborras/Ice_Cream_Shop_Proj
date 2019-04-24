@@ -36,5 +36,10 @@ FactoryBot.define do
     end_time {Time.now.to_time + 3*60}
     notes {"None"}
   end
+  
+  factory :flavor do
+    name {"Chocolate"}
+    active {true}
+  end
 
 end
