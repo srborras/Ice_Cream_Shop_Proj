@@ -41,6 +41,8 @@ gem 'font-awesome-sass-rails', '3.0.2.2'
 gem 'geocoder', '1.3.2'
 gem 'jquery-rails'
 
+gem 'materialize-sass', '~> 0.100.2'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

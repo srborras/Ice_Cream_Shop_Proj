@@ -1,0 +1,31 @@
+$table-striped-color: #bdbdbd;
+
+$footer-color: #e05050;
+
+$primary-color: #e05050;
+
+$button-height: 26px;
+
+#form{
+  //-moz-border-radius: 25px;
+  //-webkit-border-radius: 25px;
+  margin: 24px;
+  padding: 24px;
+}
+
+#filters{
+  margin: 12px;
+}
+
+#toast-container {
+  top: auto !important;
+  right: auto !important;
+  bottom: 10%;
+  left:7%;
+}
+
+@import "materialize";
+
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+@import "https://fonts.googleapis.com/css?family=Raleway";

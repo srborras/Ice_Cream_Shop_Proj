@@ -10,24 +10,54 @@
     <%= javascript_include_tag "vendor/modernizr" %>
   </head>
 
-  <body>
-    <div id="title_area">
-      <%= link_to image_tag('creamery_title.png'), home_path %>
-    </div>
-    <%= render :partial => "partials/nav" %>
+  <body background="https://static.vecteezy.com/system/resources/previews/000/136/901/non_2x/free-minimalist-ice-cream-vector.png">
+  
+  <nav>
     
     <div class="row">
-      <div class="small-12 columns" id="main_content">
-        <%= render :partial => "partials/flash" %>
-        <%= yield %>
+    
+    <div class="col s2">
+    </div>
+    
+    <div class="col s8 center">
+      <div class="nav-wrapper">
+        &nbsp&nbsp
+        <a href="/" class="left"><b>A&M Creamery</b></a>
+    
+        <ul class="right">
+          <li><%= link_to "Assignments", assignments_path %></li> 
+          <li><%= link_to "Employees", employees_path %></li>
+          <li><%= link_to "Stores", stores_path %></li>
+        </ul>
+    
       </div>
     </div>
-    <footer>
-      <div class="small-12 columns" id="footer">
-        <%= render partial: 'partials/footer' %>
-      </div>
-    </footer> 
-    <%= javascript_include_tag "application" %>
-  </body>
-  </body>
+    
+    <div class="col s2">
+    </div>
+    
+    </div>
+    
+    
+  </nav>
+  
+  
+  
+  <div class="row">
+    
+    <div class="col s2">
+    </div>
+    
+    <div class="col s8 center">
+      <!--    MAIN CONTENT GOES HERE -->
+      <%= yield %>
+      <% flash.each do |message_type, message| %>
+        <%= javascript_tag "Materialize.toast('#{message}', 4000)" %>
+      <% end %>
+    </div>
+    
+    <div class="col s2">
+    </div>
+    
+  </div>
 </html>
