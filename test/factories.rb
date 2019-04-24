@@ -41,5 +41,10 @@ FactoryBot.define do
     name {"Chocolate"}
     active {true}
   end
+  
+  factory :storeflavor do
+    association :store
+    association :flavor
+  end
 
 end

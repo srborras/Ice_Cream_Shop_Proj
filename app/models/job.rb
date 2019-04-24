@@ -1,7 +1,8 @@
 class Job < ApplicationRecord
     
     # Callbacks
-    #before_destroy :make_inactive
+    before_destroy :maybe_destroy?
+    after_rollback :make_inactive
     
     # Relations
     has_many :shift_jobs
@@ -15,20 +16,28 @@ class Job < ApplicationRecord
     scope :inactive, -> { where(active: false) }
     scope :alphabetical, -> { order('name') }
     
-    # Callback code
-    private
+    # Methods
+    
+    def maybe_destroy?
+        maybe_destroy = self.shiftjobs.empty?
+    end
+    
+    def make_inactive
+        self.update_attribute(:active, false)
+    end
+    
     
     # Check syntax or logic
-    def inactive
-        all_shiftjobs = Shiftjob.where("job_id = ?", self.id)
-        for i in all_shiftjobs
-            if i.shift_id == nil
-                self.active == false
-            else
-                self.destroy
-            end
-        end
-    end
+    # def inactive
+    #     all_shiftjobs = Shiftjob.where("job_id = ?", self.id)
+    #     for i in all_shiftjobs
+    #         if i.shift_id == nil
+    #             self.active == false
+    #         else
+    #             self.destroy
+    #         end
+    #     end
+    # end
     
     
 end

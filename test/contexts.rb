@@ -5,6 +5,7 @@ require './test/sets/employee_contexts'
 require './test/sets/assignment_contexts'
 require './test/sets/shift_contexts'
 require './test/sets/flavor_contexts'
+require './test/sets/storeflavor_contexts'
 
 module Contexts
     # explicitly include all sets of contexts used for testing 
