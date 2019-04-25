@@ -3,15 +3,16 @@ class Employee < ApplicationRecord
   # Callbacks
   before_save :reformat_phone
   before_validation :reformat_ssn
-  before_delete :stop_destroy
-  after_rollback :make_inactive
+  
+  # before_destroy :stop_destroy
+  # after_rollback :make_inactive
   
   # Relationships
   has_many :assignments
   has_many :stores, through: :assignments
   has_one :user
   
-  accepts_nested_attributes_for :user
+  #accepts_nested_attributes_for :user
   
   # Validations
   validates_presence_of :first_name, :last_name, :date_of_birth, :ssn, :role
@@ -32,46 +33,6 @@ class Employee < ApplicationRecord
   scope :alphabetical,    -> { order('last_name, first_name') }
   
   # Other methods
-  
-  def stop_destroy
-  
-    if to_destroy?
-      
-    else
-      self.errors.add(:base, "Cannot delete a Store!")
-      throw(:abort)
-    end
-  end
-  
-  def to_destroy?
-    @to_destroy = self.shifts.past.empty?
-  end
-  
-  def delete_case
-    if @to_destroy
-    @future_shifts = self.shifts.upcoming
-    @future_shifts.each {|i| i.destroy} unless @future_shifts.empty?
-    self.curr_assignment.delete unless self.current_assignment.nil?
-    end
-    @to_destroy = nil
-  end
-  
-  def update_case
-    
-    if !@to_destroy.nil? && @to_destroy == false
-      @future_shifts = self.shifts.upcoming
-      @future_shifts.each {|i| i.destroy} unless @future_shifts.empty?
-      curr_assign = self.current_assignment
-      unless curr_assign.nil?
-        curr_assign.update_attribute(:end_date, Date.now.to_date)
-      end
-    end
-    @to_destroy = nil
-  end
-  
-  def make_inactive
-    self.update_attribute(:active, false)
-  end
   
   def name
     "#{last_name}, #{first_name}"
@@ -148,7 +109,9 @@ class Employee < ApplicationRecord
   
   # Callback code  (NOT DRY!!!)
   # -----------------------------
-   #private
+  
+   private
+   
    def reformat_phone
      phone = self.phone.to_s  # change to string in case input as all numbers 
      phone.gsub!(/[^0-9]/,"") # strip all non-digits
@@ -159,6 +122,47 @@ class Employee < ApplicationRecord
      ssn.gsub!(/[^0-9]/,"")   # strip all non-digits
      self.ssn = ssn           # reset self.ssn to new string
    end
+   
+  # def stop_destroy
+  
+  #   if to_destroy?
+      
+  #   else
+  #     self.errors.add(:base, "Cannot delete a Store!")
+  #     throw(:abort)
+  #   end
+  # end
+  
+  # def to_destroy?
+  #   @to_destroy = self.shift.past.empty?
+  # end
+  
+  # def delete_case
+  #   if @to_destroy
+  #   @future_shifts = self.shift.upcoming
+  #   @future_shifts.each {|i| i.destroy} unless @future_shifts.empty?
+  #   self.curr_assignment.delete unless self.current_assignment.nil?
+  #   end
+  #   @to_destroy = nil
+  # end
+  
+  # def update_case
+    
+  #   if !@to_destroy.nil? && @to_destroy == false
+  #     @future_shifts = self.shifts.upcoming
+  #     @future_shifts.each {|i| i.destroy} unless @future_shifts.empty?
+  #     curr_assign = self.current_assignment
+  #     unless curr_assign.nil?
+  #       curr_assign.update_attribute(:end_date, Date.now.to_date)
+  #     end
+  #   end
+  #   @to_destroy = nil
+  # end
+  
+  # def make_inactive
+  #   self.update_attribute(:active, false)
+  # end
+   
 end
 
 

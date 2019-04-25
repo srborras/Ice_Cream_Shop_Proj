@@ -46,5 +46,12 @@ FactoryBot.define do
     association :store
     association :flavor
   end
+  
+  factory :user do
+    association :employee
+    email {"egrub@gmail.com"}
+    password_digest {"123qwe"}
+  end
+  
 
 end

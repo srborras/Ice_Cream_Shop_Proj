@@ -1,7 +1,5 @@
 class User < ApplicationRecord
     
-    has_secure_password
-    
     # Relations
     belongs_to :employee
     
@@ -10,6 +8,9 @@ class User < ApplicationRecord
     validate :employee_is_active_in_system, on: :create
     
     # Methods
+    
+    # has_secure_password
+    
     def employee_is_active_in_system
         all_active_employees = Employee.active.all.map{|e| e.id}
         unless all_active_employees.include?(self.employee_id)
