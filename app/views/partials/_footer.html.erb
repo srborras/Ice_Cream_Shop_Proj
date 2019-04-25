@@ -1,15 +1,34 @@
 
-<footer>
-
-	<%= link_to 'Home', home_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
-  <%= link_to 'About the Creamery', about_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
-	<%= link_to 'Contact Us', contact_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
-	<%= link_to 'Privacy Policy', privacy_path %>
-	<br /><br />
-	
-	<div id="copy">
-		Webmaster: <%= mail_to("preethag@cmu.edu", "PREETHA GOPINATH", encode: "javascript") %> 
-		&nbsp;&nbsp;&copy 2016
+<footer class = "page-footer">
+	<div class = "row valign-wrapper">
+		<div class = "col s2">
+			
+		</div>
+		<div class = "col s8 center">
+			<%= link_to 'Home', home_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
+		  	<%= link_to 'About the Creamery', about_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
+			<%= link_to 'Contact Us', contact_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
+			<%= link_to 'Privacy Policy', privacy_path %>
+			
+		</div>
+		<div class = "col s2">
+			
+		</div>
+		
 	</div>
+	<div class="footer-copyright row valign-wrapper">
+		<div class = "col s2">
+			
+		</div>
+		<div class = "col s8 center">
+			Webmaster: <%= mail_to("srborras@qatar.cmu.edu", "Sean Borras", encode: "javascript") %> 
+			&nbsp;&nbsp;&copy 2019
+		</div>
+		<div class = "col s2">
+			
+		</div>
+		
+	</div>
+	
 
 </footer>

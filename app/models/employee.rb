@@ -71,7 +71,7 @@ class Employee < ApplicationRecord
   #       if emp_assignment_shifts != 0
   #         emp_assignment_stat = true
   #         self.active = false
-  #         emp.assignments.end_date = Date.now.to_date
+  #         emp.assignments.end_date = Date.today.to_date
           
   #         for j in emp_assignment_shifts
   #           Shift.delete(j.id)
@@ -153,7 +153,7 @@ class Employee < ApplicationRecord
   #     @future_shifts.each {|i| i.destroy} unless @future_shifts.empty?
   #     curr_assign = self.current_assignment
   #     unless curr_assign.nil?
-  #       curr_assign.update_attribute(:end_date, Date.now.to_date)
+  #       curr_assign.update_attribute(:end_date, Date.today.to_date)
   #     end
   #   end
   #   @to_destroy = nil
