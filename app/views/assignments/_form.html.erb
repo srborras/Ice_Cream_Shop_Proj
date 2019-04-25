@@ -11,32 +11,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :store_id %>
-    <%= form.number_field :store_id %>
+  <div class="input-field">
+    <%= form.label :store_id %><br/>
+    <%= form.collection_select :store_id, Store.alphabetical, :id, :name, :prompt => "Select ..." %>
   </div>
 
-  <div class="field">
-    <%= form.label :employee_id %>
-    <%= form.number_field :employee_id %>
+  <div class="input-field">
+    <%= form.label :employee_id %><br/>
+    <%= form.collection_select :employee_id, Employee.alphabetical, :id, :first_name, :prompt => "Select ..." %>
   </div>
 
-  <div class="field">
-    <%= form.label :start_date %>
+  <div class="input-field">
+    <%= form.label :start_date %><br/>
     <%= form.date_select :start_date %>
   </div>
 
-  <div class="field">
-    <%= form.label :end_date %>
+  <div class="input-field">
+    <%= form.label :end_date %><br/>
     <%= form.date_select :end_date, {:include_blank => true, :default => nil} %>
   </div>
 
-  <div class="field">
-    <%= form.label :pay_level %>
-    <%= form.number_field :pay_level %>
+  <div class="input-field">
+    <%= form.label :pay_level %><br/>
+    <%= form.select :pay_level, ([['6', 6], ['5', 5], ['4', 4],
+        ['3', 3], ['2', 2], ['1', 1]]) %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :class=> "waves-effect waves-light btn light-blue" %>
   </div>
 <% end %>

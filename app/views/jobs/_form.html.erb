@@ -1,15 +1,32 @@
+<%= form_with(model: job, local: true) do |form| %>
+  <% if job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
 
-<%= simple_form_for(@job) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <ul>
+      <% job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%= f.input :active %>
+  <div class="input-field">
+    <%= form.label :name %><br/>
+    <%= form.text_field :name %>
+  </div>
+  
+  <div class="input-field">
+    <%= form.label :description %><br/>
+    <%= form.text_area :description %>
+  </div>
+  
+  <div class="input-field">
+    <%= form.label :active %><br/>
+    <%= form.select :active, ([["True", true], ["False", false]]) %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="actions">
+    <%= form.submit :class=> "waves-effect waves-light btn light-blue" %>
   </div>
 <% end %>

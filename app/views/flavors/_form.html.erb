@@ -1,14 +1,28 @@
 
-<%= simple_form_for(@flavor) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= form_with(model: flavor, local: true) do |form| %>
+  <% if flavor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(flavor.errors.count, "error") %> prohibited this flavor from being saved:</h2>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :active %>
+      <ul>
+      <% flavor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-field">
+    <%= form.label :name %><br/>
+    <%= form.text_field :name %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="input-field">
+    <%= form.label :active %><br/>
+    <%= form.select :active, ([['True', true], ['False', false]]) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit :class=> "waves-effect waves-light btn light-blue"  %>
   </div>
 <% end %>

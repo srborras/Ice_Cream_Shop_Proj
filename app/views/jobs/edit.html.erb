@@ -1,6 +1,10 @@
+<div class="grey lighten-4" id="form">
+
 <h1>Editing Job</h1>
 
 <%= render 'form', job: @job %>
 
-<%= link_to 'Show', @job %> |
-<%= link_to 'Back', jobs_path %>
+<br/>
+<%= link_to 'Show', @job, :class=> "waves-effect waves-light btn green"  %>
+<%= link_to 'Back', jobs_path, :class=> "waves-effect waves-light btn red"  %>
+</div>

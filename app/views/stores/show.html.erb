@@ -1,46 +1,34 @@
 <div class="grey lighten-4" id="form">
-
 <h2> <%= @store.name %> Store Information </h2>
-  
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @store.name %>
-</p>
+<p><b>Store Name:</b>
+<%= @store.name %></p>
 
-<p>
-  <strong>Street:</strong>
-  <%= @store.street %>
-</p>
+<p></p><b>Street:</b>
+<%= @store.name %></p>
 
-<p>
-  <strong>City:</strong>
-  <%= @store.city %>
-</p>
+<p><b>City:</b>
+<%= @store.city %></p>
 
-<p>
-  <strong>State:</strong>
-  <%= @store.state %>
-</p>
+<p><b>State:</b>
+<%= @store.state %></p>
 
-<p>
-  <strong>Zip:</strong>
-  <%= @store.zip %>
-</p>
+<p><b>ZIP:</b>
+<%= @store.zip %></p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @store.phone %>
-</p>
+<p><b>Phone:</b>
+<%= @store.phone %></p>
 
-<p>
-  <strong>Active:</strong>
-  <%= @store.active %>
-</p>
+<p><b>Status:</b>
+<%= @store.active %></p>
+
+<br/>
 
 <%= link_to 'Edit', edit_store_path(@store), :class=> "waves-effect waves-light btn light-blue" %>
 <%= link_to 'Delete', @store, method: :delete, :class=> "waves-effect waves-light btn red" %>
 <%= link_to 'Return', stores_path, :class=> "waves-effect waves-light btn green" %>
-
 </div>
+  
+
+

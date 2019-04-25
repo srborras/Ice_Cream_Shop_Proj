@@ -2,7 +2,9 @@ class Shift < ApplicationRecord
     
     # Callbacks
     # Check conditional
-    before_save :set_end #, if: Assignment.find(self.assignment_id).end_date != nil
+    before_create :set_end #, if: Assignment.find(self.assignment_id).end_date != nil
+    # before_create :curr_assign
+    # before_delete :
     
     # Relations
     belongs_to :assignment
@@ -11,8 +13,8 @@ class Shift < ApplicationRecord
     
     # Validations
     validates_presence_of :date, :start_time, :assignment_id
-    validate :curr_assign, on: :create
-    validate :can_delete, on: :delete
+    # validate :curr_assign, on: :create
+    # validate :can_delete, on: :delete
     
     # Scopes
     scope :completed, -> { joins(:shift_job).where.not(job_id: nil) }
@@ -22,8 +24,8 @@ class Shift < ApplicationRecord
     scope :for_store, -> (store_id) { joins(:assignment).where("store_id = ?". store_id) }
     scope :for_employee, -> (employee_id) { joins(:assignment).where("employee_id = ?". employee_id) }
     
-    scope :past, -> { where("date < ?", Date.now.to_date) }
-    scope :upcoming, -> { where("date >= ?", Date.now.to_date) }
+    scope :past, -> { where("date < ?", Date.today.to_date) }
+    scope :upcoming, -> { where("date >= ?", Date.today.to_date) }
     
     #Check Syntax
     scope :for_next_days, -> (num){ where("date >= ?", num.days.from_now ) }

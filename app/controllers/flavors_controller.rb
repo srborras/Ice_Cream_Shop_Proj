@@ -4,7 +4,8 @@ class FlavorsController < ApplicationController
   # GET /flavors
   # GET /flavors.json
   def index
-    @flavors = Flavor.all
+    @active_flavors = Flavor.active.alphabetical.paginate(page: params[:page]).per_page(10)
+    @inactive_flavors = Flavor.inactive.alphabetical.paginate(page: params[:page]).per_page(10)  
   end
 
   # GET /flavors/1

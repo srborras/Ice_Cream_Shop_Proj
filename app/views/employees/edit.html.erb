@@ -1,6 +1,11 @@
-<h1>Editing Employee</h1>
+<div class="grey lighten-4" id="form">
+
+<h1>Editing <%= @employee.name %>'s Info</h1>
 
 <%= render 'form', employee: @employee %>
 
-<%= link_to 'Show', @employee %> |
-<%= link_to 'Back', employees_path %>
+<br />
+<%= link_to 'Show', @employee, :class=> "waves-effect waves-light btn green"  %> |
+<%= link_to 'Back', employees_path, :class=> "waves-effect waves-light btn red"  %>
+
+</div>

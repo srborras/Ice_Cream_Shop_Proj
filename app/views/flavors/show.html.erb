@@ -1,3 +1,5 @@
+<div class="grey lighten-4" id="form">
+<h2> Flavor Information</h2>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -10,5 +12,8 @@
   <%= @flavor.active %>
 </p>
 
-<%= link_to 'Edit', edit_flavor_path(@flavor) %> |
-<%= link_to 'Back', flavors_path %>
+<%= link_to 'Edit', edit_flavor_path(@flavor), :class=> "waves-effect waves-light btn light-blue"  %>
+<%= link_to 'Delete', @flavor, method: :delete, :class=> "waves-effect waves-light btn red" %>
+<%= link_to 'Back', flavors_path, :class=> "waves-effect waves-light btn green"  %>
+
+</div>

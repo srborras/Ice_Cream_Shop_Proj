@@ -11,43 +11,43 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :first_name %>
+  <div class="input-field">
+    <%= form.label :first_name %><br />
     <%= form.text_field :first_name %>
   </div>
 
-  <div class="field">
-    <%= form.label :last_name %>
+  <div class="input-field">
+    <%= form.label :last_name %><br />
     <%= form.text_field :last_name %>
   </div>
 
-  <div class="field">
-    <%= form.label :ssn %>
+  <div class="input-field">
+    <%= form.label :ssn %><br />
     <%= form.text_field :ssn %>
   </div>
 
-  <div class="field">
-    <%= form.label :date_of_birth %>
-    <%= form.date_select :date_of_birth , :order => [:day, :month, :year], :start_year => 1980, :end_year => Time.now.year - 18 %>
+  <div class="input-field">
+    <%= form.label :date_of_birth %><br />
+    <%= form.date_select :date_of_birth , :order => [:year, :month, :day], :start_year => 1980, :end_year => Time.now.year - 18 %>
     
   </div>
 
-  <div class="field">
-    <%= form.label :phone %>
+  <div class="input-field">
+    <%= form.label :phone %><br />
     <%= form.text_field :phone %>
   </div>
 
-  <div class="field">
-    <%= form.label :role %>
+  <div class="input-field">
+    <%= form.label :role %><br />
     <%= form.text_field :role %>
   </div>
 
-  <div class="field">
-    <%= form.label :active %>
-    <%= form.check_box :active %>
+  <div class="input-field">
+    <%= form.label :active %><br />
+    <%= form.select :active, ([['True', true], ['False', false]]) %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :class=> "waves-effect waves-light btn light-blue" %>
   </div>
 <% end %>

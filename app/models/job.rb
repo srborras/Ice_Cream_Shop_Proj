@@ -18,7 +18,7 @@ class Job < ApplicationRecord
     
     # Methods
     def stop_destroy
-        if make_destroy?
+        if maybe_destroy?
             self.errors.add(:base, "Cannot delete a Store!")
             throw(:abort)
         end

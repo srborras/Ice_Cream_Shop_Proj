@@ -1,3 +1,5 @@
+<div class="grey lighten-4" id="form">
+<h2> Job Information</h2>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -15,5 +17,8 @@
   <%= @job.active %>
 </p>
 
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to 'Back', jobs_path %>
+<br/>
+<%= link_to 'Edit', edit_job_path(@job), :class=> "waves-effect waves-light btn light-blue" %>
+<%= link_to 'Delete', @assignment, method: :delete, :class=> "waves-effect waves-light btn red" %>
+<%= link_to 'Back', jobs_path, :class=> "waves-effect waves-light btn green" %>
+</div>

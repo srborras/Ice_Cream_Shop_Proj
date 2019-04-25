@@ -11,32 +11,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :assignment_id %>
-    <%= form.number_field :assignment_id %>
+  <div class="input-field">
+    <%= form.label :assignment_id %><br/>
+    <%= form.collection_select :assignment_id, Assignment.chronological, :id, :id, :prompt => "Select ..." %>
   </div>
 
-  <div class="field">
-    <%= form.label :date %>
+  <div class="input-field">
+    <%= form.label :date %><br/>
     <%= form.date_select :date %>
   </div>
 
-  <div class="field">
-    <%= form.label :start_time %>
+  <div class="input-field">
+    <%= form.label :start_time %><br/>
     <%= form.time_select :start_time %>
   </div>
 
-  <div class="field">
-    <%= form.label :end_time %>
+  <div class="input-field">
+    <%= form.label :end_time %><br/>
     <%= form.time_select :end_time %>
   </div>
 
-  <div class="field">
-    <%= form.label :notes %>
+  <div class="input-field">
+    <%= form.label :notes %><br/>
     <%= form.text_area :notes %>
   </div>
 
+  <br/>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :class=> "waves-effect waves-light btn light-blue"%>
   </div>
 <% end %>

@@ -1,6 +1,8 @@
+<div class="grey lighten-4" id="form">
 <p id="notice"><%= notice %></p>
+<% if (!@active_jobs.nil?) then %>
 
-<h1>Jobs</h1>
+<h1>Active Jobs</h1>
 
 <table>
   <thead>
@@ -13,19 +15,52 @@
   </thead>
 
   <tbody>
-    <% @jobs.each do |job| %>
+    <% @active_jobs.each do |job| %>
       <tr>
         <td><%= job.name %></td>
         <td><%= job.description %></td>
         <td><%= job.active %></td>
-        <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', job, :class=> "waves-effect waves-light btn blue"   %></td>
+        <td><%= link_to 'Edit', edit_job_path(job), :class=> "waves-effect waves-light btn green"   %></td>
+        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "waves-effect waves-light btn red"   %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<%end%>
 <br>
+<% if (!@inactive_jobs.nil?) then %>
 
-<%= link_to 'New Job', new_job_path %>
+<h1>Inactive Jobs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inactive_jobs.each do |job| %>
+      <tr>
+        <td><%= job.name %></td>
+        <td><%= job.description %></td>
+        <td><%= job.active %></td>
+        <td><%= link_to 'Show', job, :class=> "waves-effect waves-light btn light-blue"   %></td>
+        <td><%= link_to 'Edit', edit_job_path(job), :class=> "waves-effect waves-light btn green"   %></td>
+        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "waves-effect waves-light btn red"   %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%end%>
+
+<br/>
+<%= link_to 'New Job', new_job_path, :class=> "waves-effect waves-light btn orange"   %>
+
+</div>

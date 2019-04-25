@@ -5,6 +5,8 @@ class ShiftsController < ApplicationController
   # GET /shifts.json
   def index
     @shifts = Shift.all
+    @past_shifts = Shift.past.paginate(page: params[:page]).per_page(10)
+    @upcoming_shifts = Shift.upcoming.paginate(page: params[:page]).per_page(15)
   end
 
   # GET /shifts/1
