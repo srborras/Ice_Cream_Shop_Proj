@@ -5,8 +5,8 @@ class Job < ApplicationRecord
     after_rollback :make_inactive
     
     # Relations
-    has_many :shift_jobs
-    has_many :shifts, through: :shift_jobs
+    has_many :shiftjobs
+    has_many :shifts, through: :shiftjobs
     
     # Validations
     validates_presence_of :name
@@ -17,6 +17,12 @@ class Job < ApplicationRecord
     scope :alphabetical, -> { order('name') }
     
     # Methods
+    def stop_destroy
+        if make_destroy?
+            self.errors.add(:base, "Cannot delete a Store!")
+            throw(:abort)
+        end
+    end
     
     def maybe_destroy?
         maybe_destroy = self.shiftjobs.empty?

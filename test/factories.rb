@@ -53,5 +53,11 @@ FactoryBot.define do
     password_digest {"5ebe2294ecd0e0f08eab7690d2a6ee69"}
   end
   
+  factory :job do
+    name {"Prep food"}
+    description {"Prepare the food to be sold"}
+    active {true}
+  end
+  
 
 end
