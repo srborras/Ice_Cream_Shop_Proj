@@ -6,6 +6,9 @@ class UserTest < ActiveSupport::TestCase
   should belong_to(:employee)
   
   # Test Validations
+  should validate_presence_of(:email)
+  should validate_presence_of(:password_digest)
+  should validate_presence_of(:employee_id)
   should validate_uniqueness_of(:email)
   
   # Context
