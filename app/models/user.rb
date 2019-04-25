@@ -9,7 +9,7 @@ class User < ApplicationRecord
     
     # Methods
     
-    # has_secure_password
+    has_secure_password
     
     def employee_is_active_in_system
         all_active_employees = Employee.active.all.map{|e| e.id}

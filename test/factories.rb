@@ -50,7 +50,7 @@ FactoryBot.define do
   factory :user do
     association :employee
     email {"egrub@gmail.com"}
-    password_digest {"123qwe"}
+    password_digest {"5ebe2294ecd0e0f08eab7690d2a6ee69"}
   end
   
 
