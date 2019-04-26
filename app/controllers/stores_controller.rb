@@ -1,5 +1,7 @@
 class StoresController < ApplicationController
   before_action :set_store, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user
+  #before_action :correct_user, only: [:show, :edit, :update, :destroy]
 
   # GET /stores
   # GET /stores.json
@@ -73,4 +75,15 @@ class StoresController < ApplicationController
     def store_params
       params.require(:store).permit(:name, :street, :city, :state, :zip, :phone, :active)
     end
+    
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+    
+    # def correct_user
+    #   redirect_to(root_url) unless @user == current_user
+    # end
 end

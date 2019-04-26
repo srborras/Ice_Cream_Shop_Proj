@@ -20,7 +20,13 @@ Rails.application.routes.draw do
   get 'contact' => 'home#contact', as: :contact
   get 'privacy' => 'home#privacy', as: :privacy
   
+  resources :demos, only: [:new, :create, :destroy]
+  get 'demos/new', to: 'demos#new', as: :login
+  get 'demos/destroy', to: 'demos#destroy', as: :logout
+  
+  root 'demos#new'
+  
   # Set the root url
-  root :to => 'home#home'  
+  #root :to => 'home#home'  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

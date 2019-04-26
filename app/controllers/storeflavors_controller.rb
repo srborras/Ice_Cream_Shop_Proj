@@ -1,5 +1,7 @@
 class StoreflavorsController < ApplicationController
   before_action :set_storeflavor, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user
+  before_action :correct_user, only: [:show, :edit, :update, :destroy]
 
   # GET /storeflavors
   # GET /storeflavors.json
@@ -70,5 +72,16 @@ class StoreflavorsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def storeflavor_params
       params.require(:storeflavor).permit(:store_id, :flavor_id)
+    end
+    
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+    
+    def correct_user
+      redirect_to(root_url) unless @user == current_user
     end
 end

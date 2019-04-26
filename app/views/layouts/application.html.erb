@@ -20,7 +20,12 @@
     </div>
     
     <div class="col s8 center">
+      
+    
       <div class="nav-wrapper">
+        
+        <% if logged_in? %>
+      
         &nbsp&nbsp
         <a href="/" class="left"><b>A&M Creamery</b></a>
     
@@ -28,9 +33,16 @@
           <li><%= link_to "Assignments", assignments_path %></li> 
           <li><%= link_to "Employees", employees_path %></li>
           <li><%= link_to "Stores", stores_path %></li>
+          <li><%= link_to "Flavors", flavors_path %></li> 
+          <li><%= link_to "Shifts", shifts_path %></li>
+          <li><%= link_to "Jobs", jobs_path %></li>
+          <li><strong><%= link_to "Logout", logout_path %></strong></li>
         </ul>
+        
+        <% end %>
     
       </div>
+      
     </div>
     
     <div class="col s2">
@@ -50,6 +62,7 @@
     
     <div class="col s8 center">
       <!--    MAIN CONTENT GOES HERE -->
+      
       <%= yield %>
       <% flash.each do |message_type, message| %>
         <%= javascript_tag "Materialize.toast('#{message}', 4000)" %>

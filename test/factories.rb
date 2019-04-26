@@ -31,9 +31,9 @@ FactoryBot.define do
   factory :shift do
     association :assignment
     # Check Date.now syntax
-    date {2.weeks.ago.to_date}
+    date {1.weeks.ago.to_date}
     start_time {Time.now.to_time}
-    end_time {Time.now.to_time + 3*60}
+    end_time {Time.now.to_time}
     notes {"None"}
   end
   

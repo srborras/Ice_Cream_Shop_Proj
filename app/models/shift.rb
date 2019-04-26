@@ -13,8 +13,8 @@ class Shift < ApplicationRecord
     
     # Validations
     validates_presence_of :date, :start_time, :assignment_id
-    # validate :curr_assign, on: :create
-    # validate :can_delete, on: :delete
+    validates_time :start_time
+    validates_time :end_time, after: :start_time
     
     # Scopes
     scope :completed, -> { joins(:shift_job).where.not(job_id: nil) }
@@ -28,6 +28,7 @@ class Shift < ApplicationRecord
     scope :upcoming, -> { where("date >= ?", Date.today.to_date) }
     
     #Check Syntax
+    scope :chronological, -> {order(:date)}
     scope :for_next_days, -> (num){ where("date >= ?", num.days.from_now ) }
     scope :for_past_days, -> (num){ where("date < ?", num.days.from_now ) }
     scope :by_store, -> { joins(:assignment => :store ).order('name')}
@@ -38,16 +39,14 @@ class Shift < ApplicationRecord
     private
     
     def set_end
-        time = self.start_time.t_time + 3*60
+        time = self.start_time.to_time + 3*60*60
         self.end_time = time
     end
     
-    def curr_assign
-        curr_assignment = Assignment.find(self.assignment_id).end_date
-        unless curr_assignment.nil? #.nil?
-            errors.add(:assignment_id, "Is not a current assignment")
+    def is_it_current
+        unless self.assignment.nil? or self.assignment.end_date.nil?
+            errors.add(:assignment_id, "is not a current assignment")
         end
-        
     end
     
     def can_delete
@@ -59,12 +58,7 @@ class Shift < ApplicationRecord
     
     # Check Syntax
     def completed?
-        all_shiftjobs = Shiftjob.where("shift_id = ?", self.id)
-        for x in all_shiftjobs
-            if x.job_id == nil
-                return false
-            end
-        end
+        self.shift_jobs.size > 0
     end
     
     def start_now

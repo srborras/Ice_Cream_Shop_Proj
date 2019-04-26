@@ -1,0 +1,25 @@
+<div class="grey lighten-4" id="form">
+<%= form_for(:demo, url: demos_path) do |f| %>
+
+    <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+
+    <h2> Login </h2>
+
+    <div class="input-field">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+    </div>
+    
+    <div class="input-field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+    </div>
+    
+    <div class="actions">
+    <%= f.submit "Login", :class=> "waves-effect waves-light btn light-blue" %>
+    </div>
+    
+<% end %>
+</div>

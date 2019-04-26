@@ -2,8 +2,8 @@ class Store < ApplicationRecord
 # Callbacks
   before_save :reformat_phone
   
-  before_destroy :stop_destroy
-  after_rollback :make_inactive
+  # before_destroy :stop_destroy
+  # after_rollback :make_inactive
   
   # Relationships
   has_many :assignments
