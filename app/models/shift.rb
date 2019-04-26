@@ -2,7 +2,7 @@ class Shift < ApplicationRecord
     
     # Callbacks
     # Check conditional
-    before_create :set_end #, if: Assignment.find(self.assignment_id).end_date != nil
+    # before_create :set_end #, if: Assignment.find(self.assignment_id).end_date != nil
     # before_create :curr_assign
     # before_delete :
     
@@ -24,8 +24,8 @@ class Shift < ApplicationRecord
     scope :for_store, -> (store_id) { joins(:assignment).where("store_id = ?". store_id) }
     scope :for_employee, -> (employee_id) { joins(:assignment).where("employee_id = ?". employee_id) }
     
-    scope :past, -> { where("date < ?", Date.today.to_date) }
-    scope :upcoming, -> { where("date >= ?", Date.today.to_date) }
+    scope :past, -> { where("date < ?", Date.today) }
+    scope :upcoming, -> { where("date >= ?", Date.today) }
     
     #Check Syntax
     scope :chronological, -> {order(:date)}
@@ -39,7 +39,7 @@ class Shift < ApplicationRecord
     private
     
     def set_end
-        time = self.start_time.to_time + 3*60*60
+        time = self.start_time.to_time + (3*60*60)
         self.end_time = time
     end
     

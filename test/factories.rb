@@ -32,8 +32,8 @@ FactoryBot.define do
     association :assignment
     # Check Date.now syntax
     date {1.weeks.ago.to_date}
-    start_time {Time.now.to_time}
-    end_time {Time.now.to_time}
+    start_time {Time.now}
+    end_time {Time.now + (3*60*60)}
     notes {"None"}
   end
   
@@ -57,6 +57,11 @@ FactoryBot.define do
     name {"Prep food"}
     description {"Prepare the food to be sold"}
     active {true}
+  end
+  
+  factory :shiftjob do
+    association :shift
+    association :job
   end
   
 

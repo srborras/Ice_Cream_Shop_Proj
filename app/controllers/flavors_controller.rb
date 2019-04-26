@@ -1,7 +1,7 @@
 class FlavorsController < ApplicationController
   before_action :set_flavor, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user
-  before_action :correct_user, only: [:show, :edit, :update, :destroy]
+  # before_action :correct_user, only: [:show, :edit, :update, :destroy]
 
   # GET /flavors
   # GET /flavors.json
@@ -82,7 +82,7 @@ class FlavorsController < ApplicationController
       end
     end
     
-    def correct_user
-      redirect_to(root_url) unless @user == current_user
-    end
+    # def correct_user
+    #   redirect_to(root_url) unless @user == current_user
+    # end
 end
