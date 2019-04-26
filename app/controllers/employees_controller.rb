@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user
-  before_action :correct_user, only: [:show, :edit, :update, :destroy]
+  # before_action :correct_user, only: [:show, :edit, :update, :destroy]
   
   def index
     @active_employees = Employee.active.alphabetical.paginate(page: params[:page]).per_page(10)
@@ -75,8 +75,8 @@ class EmployeesController < ApplicationController
       end
     end
     
-    def correct_user
-      redirect_to(root_url) unless @user == current_user
-    end
+    # def correct_user
+    #   redirect_to(root_url) unless @user == current_user
+    # end
 
 end

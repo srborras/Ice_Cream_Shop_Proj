@@ -1,10 +1,12 @@
 <div class="grey lighten-4" id="form">
 <p id="notice"><%= notice %></p>
-<% if (!@active_employees.nil?) then %>
-
-
-
 <h1>Active Employees</h1>
+
+<% if @active_employees.size <= 0 then%>
+
+<p> Section is currently empty</p>
+
+<% else %>
 
 <table>
   <thead>
@@ -19,8 +21,7 @@
   </thead>
 
   <tbody>
-    <% 
-    @active_employees.each do |employee| %>
+    <% @active_employees.each do |employee| %>
       <tr>
         <td><%= employee.name %></td>
         <td><%= employee.ssn %></td>
@@ -35,10 +36,15 @@
   </tbody>
 </table>
 <%end%>
+
 <br>
-<% if (!@inactive_employees.nil?) then %>
 
 <h1>Inactive Employees</h1>
+<% if @inactive_employees.size <= 0 then%>
+
+<p> Section is currently empty</p>
+
+<% else %>
 
 <table>
   <thead>

@@ -1,8 +1,13 @@
 <div class="grey lighten-4" id="form">
 <p id="notice"><%= notice %></p>
-<% if (!@current_assignments.nil?) then %>
-
 <h1>Current Assignments</h1>
+<% if @current_assignments.size <= 0 then%>
+
+<p> Section is currently empty</p>
+
+<% else%>
+
+
 
 <table>
   <thead>
@@ -29,9 +34,13 @@
 </table>
 <%end%>
 <br>
-<% if (!@past_assignments.nil?) then %>
 
 <h1>Past Assignments</h1>
+<% if @past_assignments.size <= 0 then%>
+
+<p> Section is currently empty</p>
+
+<% else %>
 
 <table>
   <thead>

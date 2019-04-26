@@ -1,8 +1,12 @@
 <div class="grey lighten-4" id="form">
 <p id="notice"><%= notice %></p>
-<% if (!@active_jobs.nil?) then %>
 
 <h1>Active Jobs</h1>
+<% if @active_jobs.size <= 0 then%>
+
+<p> Section is currently empty</p>
+
+<% else %>
 
 <table>
   <thead>
@@ -30,9 +34,14 @@
 
 <%end%>
 <br>
-<% if (!@inactive_jobs.nil?) then %>
 
 <h1>Inactive Jobs</h1>
+<% if @inactive_jobs.size <= 0 then%>
+
+<p> Section is currently empty</p>
+
+<% else %>
+
 
 <table>
   <thead>

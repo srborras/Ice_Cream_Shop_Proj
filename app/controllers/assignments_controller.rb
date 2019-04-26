@@ -2,7 +2,7 @@ class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
   # before_action :set_assignment, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user
-  before_action :correct_user, only: [:show, :edit, :update, :destroy]
+  # before_action :correct_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @current_assignments = Assignment.current.by_store.by_employee.chronological.paginate(page: params[:page]).per_page(15)
@@ -81,8 +81,8 @@ class AssignmentsController < ApplicationController
     end
   end
   
-  def correct_user
-    redirect_to(root_url) unless @user == current_user
-  end
+  # def correct_user
+  #   redirect_to(root_url) unless @user == current_user
+  # end
   
 end

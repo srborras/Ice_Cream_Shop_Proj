@@ -1,8 +1,12 @@
 <div class="grey lighten-4" id="form">
 <p id="notice"><%= notice %></p>
-<% if (!@active_flavors.nil?) then %>
 
 <h1>Active Flavors</h1>
+<% if @active_flavors.size <= 0 then%>
+
+<p> Section is currently empty</p>
+
+<% else %>
 
 <table>
   <thead>
@@ -28,9 +32,13 @@
 
 <%end%>
 <br>
-<% if (!@inactive_flavors.nil?) then %>
 
 <h1>Inactive Flavors</h1>
+<% if @inactive_flavors.size <= 0 then%>
+
+<p> Section is currently empty</p>
+
+<% else %>
 
 <table>
   <thead>
@@ -48,7 +56,7 @@
         <td><%= flavor.active %></td>
         <td><%= link_to 'Show', flavor, :class=> "waves-effect waves-light btn light-blue"  %></td>
         <td><%= link_to 'Edit', edit_flavor_path(flavor), :class=> "waves-effect waves-light btn green"  %></td>
-        <td><%= link_to 'Destroy', flavor, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "waves-effect waves-light btn red"  %></td>
+        
       </tr>
     <% end %>
   </tbody>

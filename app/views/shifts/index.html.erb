@@ -1,8 +1,13 @@
 <div class="grey lighten-4" id="form">
 <p id="notice"><%= notice %></p>
-<% if (!@upcoming_shifts.nil?) then %>
 
 <h1>Upcoming Shifts</h1>
+<% if @upcoming_shifts.size <= 0 then %>
+
+<p> Section is currently empty</p>
+
+<% else %>
+
 
 <table>
   <thead>
@@ -32,9 +37,15 @@
 
 <%end%>
 <br>
-<% if (!@past_shifts.nil?) then %>
 
 <h1>Past Shifts</h1>
+
+<% if @past_shifts.size <= 0 then %>
+
+<p> Section is currently empty</p>
+
+<% else %>
+
 
 <table>
   <thead>
@@ -66,6 +77,7 @@
 
 
 <br/>
+
 <%= link_to 'New Shift', new_shift_path, :class=> "waves-effect waves-light btn orange" %>
 
 </div>

@@ -6,7 +6,7 @@ class DemosController < ApplicationController
        user = User.find_by(email: params[:demo][:email].downcase) 
        if user && user.authenticate(params[:demo][:password])
            login(user)
-           redirect_to user
+           redirect_to home_path
        else
            flash.now[:danger] = "Invalid email or password"
            render 'new'

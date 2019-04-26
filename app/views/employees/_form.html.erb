@@ -46,6 +46,18 @@
     <%= form.label :active %><br />
     <%= form.select :active, ([['True', true], ['False', false]]) %>
   </div>
+  
+  <%= form.fields_for :user do |field|%>
+    <div class="input-field">
+      <%= field.label "Email" %><br/>
+      <%= field.text_field :email %>
+    </div>
+    
+    <div class="input-field">
+      <%= field.label "Password" %><br/>
+      <%= field.password_field :password %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit :class=> "waves-effect waves-light btn light-blue" %>
