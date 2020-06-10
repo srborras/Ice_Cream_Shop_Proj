@@ -38,7 +38,7 @@ gem 'simple_form'
 gem 'will_paginate'
 gem 'foundation-rails', '5.5.3.2'
 gem 'font-awesome-sass-rails', '3.0.2.2'
-gem 'geocoder', '1.3.2'
+gem 'geocoder', '1.6.1'
 gem 'jquery-rails'
 
 gem 'materialize-sass', '~> 0.100.2'
